@@ -22,7 +22,7 @@
  *      Trigger "New ticket" (When: Issue Created):
  *        {
  *          "event": "issue.created",
- *          "issue_id": "{{issue.id}}",
+ *          "issue.id": "{{issue.id}}",
  *          "title": "{{issue.title}}",
  *          "url": "{{issue.link}}"
  *        }
@@ -30,7 +30,7 @@
  *      Trigger "Ticket closed" (When: Issue Status Changed, If: Status = Closed):
  *        {
  *          "event": "issue.closed",
- *          "issue_id": "{{issue.id}}"
+ *          "issue.id": "{{issue.id}}"
  *        }
  *
  * Gather side:
