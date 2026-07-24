@@ -145,8 +145,6 @@ app.post("/pylon-webhook", async (req, res) => {
 		res.status(200).json({ ok: false });
 	}
 });
-	}
-});
 
 app.get("/healthz", (_req, res) => res.status(200).send("ok"));
 
