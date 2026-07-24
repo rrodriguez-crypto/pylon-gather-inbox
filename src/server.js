@@ -126,25 +126,25 @@ app.post("/pylon-webhook", async (req, res) => {
 		return res.status(401).json({ error: "invalid signature" });
 	}
 
-	const { event, issue_id, title, url } = req.body ?? {};
+	const { event, ticket_id, title, url } = req.body ?? {};
 
 	try {
 		switch (event) {
-			case "issue.assigned":
-				await addTicket({ issue_id, title, url });
+			case "assigned":
+				await addTicket({ issue_id: ticket_id, title, url });
 				break;
-			case "issue.resolved":
-				await removeTicket({ issue_id });
+			case "resolved":
+				await removeTicket({ issue_id: ticket_id });
 				break;
 			default:
 				console.warn(`Unrecognized event "${event}", ignoring.`);
 		}
 		res.status(200).json({ ok: true });
 	} catch (err) {
-		// Return 200 anyway for validation-style errors (bad payload) so Pylon
-		// doesn't retry something that will never succeed; log for visibility.
 		console.error("Failed to relay event to Gather:", err instanceof Error ? err.message : err);
 		res.status(200).json({ ok: false });
+	}
+});
 	}
 });
 
